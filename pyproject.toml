@@ -1,0 +1,28 @@
+[project]
+name = "astobf"
+version = "0.1.0"
+description = "A Python source code obfuscator based on AST."
+authors = [
+    { name = "yixinBC", email = "yixinbc@foxmail.com" }
+]
+dependencies = []
+readme = "README.md"
+requires-python = ">= 3.10"
+license = { text = "GPL-3.0" }
+
+[project.scripts]
+"astobf" = "astobf:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/astobf"]
