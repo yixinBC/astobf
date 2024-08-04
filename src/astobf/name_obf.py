@@ -47,7 +47,6 @@ class NameObf(ast.NodeTransformer):
 
     def __init__(self):
         self._name_manager = NameManager()
-        self._imported_names = set()
 
     def visit_Import(self, node: ast.Import) -> ast.Import:  # noqa: N802
         """
@@ -58,7 +57,6 @@ class NameObf(ast.NodeTransformer):
                 alias.asname = self._name_manager.get_name(alias.name)
             else:
                 alias.asname = self._name_manager.get_name(alias.asname)
-            self._imported_names.add(alias.asname)
         return node
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> ast.ImportFrom:  # noqa: N802
@@ -70,7 +68,19 @@ class NameObf(ast.NodeTransformer):
                 alias.asname = self._name_manager.get_name(alias.name)
             else:
                 alias.asname = self._name_manager.get_name(alias.asname)
-            self._imported_names.add(alias.asname)
+        return node
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> ast.ClassDef:  # noqa: N802
+        """
+        don't bofucate any names in a class definition
+        """
+        return node
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.FunctionDef:  # noqa: N802
+        """
+        visit function definition node, obfuscate all names
+        """
+        node.name = self._name_manager.get_name(node.name)
         return node
 
     def visit_Attribute(self, node: ast.Attribute) -> ast.Attribute:  # noqa: N802
