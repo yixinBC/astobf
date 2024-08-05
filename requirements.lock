@@ -10,3 +10,7 @@
 #   universal: false
 
 -e file:.
+pick==2.3.2
+    # via astobf
+windows-curses==2.3.3
+    # via pick
