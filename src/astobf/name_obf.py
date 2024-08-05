@@ -5,7 +5,7 @@ all variable names are obfuscated to a string of o0Ol1I characters
 import ast
 import random
 
-from .constants import BUILTINS
+from ._constants import BUILTINS
 
 
 class NameManager:
