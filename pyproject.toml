@@ -27,6 +27,7 @@ dev-dependencies = [
 
 [tool.ruff.lint]
 select = ["F","W","N","UP","B","SIM","I"]
+ignore = ["UP015"]
 
 [tool.hatch.metadata]
 allow-direct-references = true
